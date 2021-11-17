@@ -1,0 +1,23 @@
+<div class="container box preferences">
+    <div class="title text-center">
+        <h3>Preferencias</h3>
+    </div>
+
+    <div class="body">
+        <form class="form-preferences">
+            <div class="form-group">
+                <label for="cards-number">Número de cartas</label>
+                <select class="form-control">
+                    <option *ngFor="let cardsNumber of cardsNumberList">{{ cardsNumber }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="time-limit">Tiempo límite</label>
+                <select class="form-control">
+                    <option *ngFor="let timeLimit of timeLimitList"> {{ timeLimit }}</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-miw-secondary" (click)="savePreferences()">Jugar</button>
+        </form>
+    </div>
+</div>
