@@ -1,1 +1,185 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary: rgb(255, 145, 0);
+    --primary-darkened: rgb(207, 117, 0);
+    --primary-faded: rgb(255, 210, 142);
+    --secondary: rgb(0, 115, 209);
+    --secondary-darkened: rgb(0, 86, 156);
+    --text: rgb(255, 255, 255);
+}
+
+.miw {
+    background-color: var(--primary);
+}
+
+.footer {
+    background-color: var(--secondary);
+    color: var(--text);
+}
+
+.btn.btn-miw-primary {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.btn.btn-miw-primary:hover{
+    background-color: var(--primary-darkened);
+}
+
+.btn.btn-miw-secondary {
+    background-color: var(--secondary);
+    color: var(--text);
+}
+
+.btn.btn-miw-secondary:hover {
+    background-color: var(--secondary-darkened);
+}
+
+/* Home specific style */
+
+.home-content {
+    background-color: rgb(192, 219, 245);
+    margin-right: 20px;margin-left: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 2px inset var(--secondary);
+}
+
+.home-content .h3 {
+    color: white
+}
+
+
+.home-cards {
+    max-width: 300px;
+}
+
+.home-cards.lateral-l {
+    max-width: 200px;
+    padding-left: 10px;
+}
+
+.home-cards.lateral-r {
+    max-width: 200px;
+    padding-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .home-cards.lateral-l, .home-cards.lateral-r {
+        display: none;
+    }  
+}
+
+div.box.container {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    border-style: outset;
+    border-color: var(--secondary);
+    border-width: 2px;
+    border-radius: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div.box .title {
+    border-bottom: outset;
+    background-color: var(--primary);
+    border-color: var(--secondary);
+    border-width: 1px;
+    border-radius: 1px;
+    color: var(--text);
+    color: var(--text);
+}
+
+div.box .body {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    color: var(--black);
+}
+
+/* Preferences specific styles */
+
+div.box.preferences.container {
+    width: 30%;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+div.box.preferences .body {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+form.form-preferences {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.preferences .btn.btn-miw-secondary {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Play specific styles */
+
+#play-content{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.container.game-info {
+    color: var(--text);
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+}
+label.game-info-label {
+    font-size: 2vh;
+}
+#table-top img.img-fluid {
+    padding-top: 5px;
+    max-width: 120px;
+    transition: transform .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#table-top img.img-fluid:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Records specific styles */
+
+div.box.records.container {
+    width: 50%;
+    max-width: 500px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+div.box.records .body {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.record-element {
+    border-bottom: 0.5px outset var(--secondary);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+img.record-position {
+    max-width: 90px;
+    margin-top: 20px;
+}
+
+.records .btn.btn-miw-secondary {
+    margin-top: 20px;
+    width: 100%;
+}
