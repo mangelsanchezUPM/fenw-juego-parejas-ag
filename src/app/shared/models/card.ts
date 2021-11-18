@@ -13,13 +13,16 @@ export class Card {
     return this._value;
   }
   get image(): string {
-    return this.image;
+    return this._image;
   }
   get shown(): boolean {
-    return this.shown;
+    return this._shown;
+  }
+  set shown(shown: boolean) {
+    this._shown = shown;
   }
   getCardImage(value: number) {
-    let cardsImgPath = '../../assets';
+    let cardsImgPath = '../assets/naipes/';
     switch (value) {
       case 1:
         cardsImgPath += 'bastos1';

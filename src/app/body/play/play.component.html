@@ -1,0 +1,44 @@
+<div id="play-content" class="container-fluid">
+    <div class="row">
+        <div class="col-1">
+            <div class="container text-center miw game-info">
+                <section class="game-info-section">
+                    <label class="game-info-label">Puntuación</label>
+                    <h3 id="score-info" class=" game-info-data">{{ score }}</h3>
+                </section>
+                <section class="game-info-section">
+                    <label class="game-info-label">Tiempo</label>
+                    <h3 id="time-limit-info" class=" game-info-data">{{ timer > 0 ? timer : 'No' }}</h3>
+                </section>
+                <hr>
+                <section class="game-info-section">
+                    <label class="game-info-label">Total</label>
+                    <h3 id="total-score-info" class="game-info-data">{{ totalScore }}</h3>
+                </section>
+            </div>
+        </div>
+        <div class="col-10">
+            <div id="table-top" class="container text-center">
+                <img *ngFor="let card of board; let i = index" id="img-{{i}}" class="img-fluid" draggable="false"
+                    [src]="cardsImagesBasePath + 'reverso.jpg'" (click)="selectCard(i)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal fade" id="game-over-modal" role="alertdialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header ">
+                <h5 class="modal-title">Juego finalizado</h5>
+            </div>
+            <div class="modal-body">
+                <p id="game-over-message" class="text-center"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-miw-secondary" onclick="exitGame()">Salir</button>
+                <button type="button" class="btn btn-miw-primary" onclick="restartGame()">Reiniciar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('cards-number', '20');
-    localStorage.setItem('time-limit', '20');
+    localStorage.setItem('time-limit', '0');
   }
 }

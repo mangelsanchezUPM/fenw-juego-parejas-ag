@@ -4,17 +4,17 @@
     </div>
 
     <div class="body">
-        <form class="form-preferences">
+        <form class="form-preferences" [formGroup]="preferencesForm">
             <div class="form-group">
                 <label for="cards-number">Número de cartas</label>
-                <select class="form-control">
+                <select class="form-control" formControlName="cardsNumber">
                     <option *ngFor="let cardsNumber of cardsNumberList">{{ cardsNumber }}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="time-limit">Tiempo límite</label>
-                <select class="form-control">
-                    <option *ngFor="let timeLimit of timeLimitList"> {{ timeLimit }}</option>
+                <select class="form-control" formControlName="timeLimit">
+                    <option *ngFor="let timeLimit of timeLimitList">{{ timeLimit }}</option>
                 </select>
             </div>
             <button type="button" class="btn btn-miw-secondary" (click)="savePreferences()">Jugar</button>
