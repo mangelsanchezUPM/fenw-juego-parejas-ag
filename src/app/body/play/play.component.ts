@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Card } from 'src/app/shared/models/card';
+import { Card } from 'src/app/shared/models/card.model';
 
 @Component({
   selector: 'app-play',

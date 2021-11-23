@@ -166,6 +166,8 @@ div.box.records .body {
     margin-bottom: 0px;
     max-height: 400px;
     overflow-y: auto;
+    overflow-x: hidden;
+
 }
 
 .record-element {

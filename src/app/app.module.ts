@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayComponent } from './body/play/play.component';
+import { RestClientService } from './shared/services/rest-client.service';
+import { RecordsComponent } from './body/records/records.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { PlayComponent } from './body/play/play.component';
     FooterComponent,
     PreferencesComponent,
     PlayComponent,
+    RecordsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { PlayComponent } from './body/play/play.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [RestClientService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
