@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark miw sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href=""><img src="../../assets/LogoUPM.png" width="40em"> Juego de las Parejas</a>
+        <a class="navbar-brand" href=""><img src="../../assets/LogoUPM.png" width="40em">Juego de las Parejas</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a id="home" class="nav-link" aria-current="page" href=";javascript" [routerLink]="'home'">
                         <i class="fa fa-home"></i> Inicio</a>
                 </li>
@@ -20,19 +20,31 @@
                         <i class="fa fa-trophy"></i> Records</a>
                 </li>
                 <li class="nav-item">
-                    <a id="preferences" class="nav-link" aria-current="page" href=";javascript" [routerLink]="'preferences'">
+                    <a id="preferences" class="nav-link" aria-current="page" href=";javascript"
+                        [routerLink]="'preferences'">
                         <i class="fa fa-cog"></i> Preferencias</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li id="login" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
+                <li *ngIf="!restClient.username" id="login" class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=";javascript" [routerLink]="'login'">
                         <i class="fa fa-sign-in"></i> Iniciar sesión</a>
                 </li>
-                <li id="register" class="nav-item">
+                <li *ngIf="restClient.username" id="logout" class="nav-item">
+                    <a class="nav-link active" aria-current="page" (click)="logout()" href=";javascript">
+                        <i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                </li>
+
+                <li *ngIf="!restClient.username" id="register" class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">
                         <i class="fa fa-user"></i> Registro</a>
                 </li>
+
+                <li *ngIf="restClient.username" id="logout" class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=";javascript">
+                        <i class="fa fa-user"></i> {{restClient.username}}</a>
+                </li>
+
             </ul>
         </div>
     </div>

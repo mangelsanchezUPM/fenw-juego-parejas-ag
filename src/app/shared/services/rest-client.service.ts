@@ -12,32 +12,39 @@ import { Record } from '../models/record.model';
 })
 export class RestClientService {
   private BASE_URL = 'http://fenw.etsisi.upm.es:10000';
-  private AUTHORIZATION_HEADER = 'Authorization';
   private _authToken = '';
+  private _username = '';
 
   constructor(private http: HttpClient) {}
 
+  get authToken() {
+    return this._authToken;
+  }
   set authToken(authToken: string) {
     this._authToken = authToken;
   }
-  
+  get username() {
+    return this._username;
+  }
+  set username(username: string) {
+    this._username = username;
+  }
+
   userLogin(username: string, password: string) {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);
-    this.http
-      .get<HttpResponse<any>>(this.BASE_URL + '/users/login', {
-        params,
-        observe: 'response',
-      })
-      .subscribe((response: HttpResponse<any>) => {
-        if (response.ok)
-          this.authToken =
-            response.headers.get(this.AUTHORIZATION_HEADER) || '';
-      });
+    return this.http.get<HttpResponse<any>>(this.BASE_URL + '/users/login', {
+      params,
+      observe: 'response',
+    });
   }
 
   getRecords() {
     return this.http.get<Record[]>(this.BASE_URL + '/records');
+  }
+  logout() {
+    this._username = '';
+    this._authToken = '';
   }
 }

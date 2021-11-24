@@ -5,6 +5,7 @@
     --secondary: rgb(0, 115, 209);
     --secondary-darkened: rgb(0, 86, 156);
     --text: rgb(255, 255, 255);
+    --error: rgb(224, 0, 0);
 }
 
 .miw {
@@ -184,4 +185,22 @@ img.record-position {
 .records .btn.btn-miw-secondary {
     margin-top: 20px;
     width: 100%;
+}
+
+.control-required {
+    content: '*';
+}
+
+.form-control.control-invalid {
+    border-color: var(--error);
+}
+
+
+.form-control.control-invalid:focus {
+    border-color: var(--error);
+}
+
+.text-error {
+    color: var(--error);
+    font-size: 0.8em;
 }
