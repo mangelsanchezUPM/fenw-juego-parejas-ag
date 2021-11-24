@@ -43,6 +43,9 @@ export class RestClientService {
   getRecords() {
     return this.http.get<Record[]>(this.BASE_URL + '/records');
   }
+  getUserRecords() {
+    return this.http.get<Record[]>(this.BASE_URL + '/records/' + this.username);
+  }
   logout() {
     this._username = '';
     this._authToken = '';
