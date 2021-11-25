@@ -35,12 +35,12 @@
                         <i class="fa fa-sign-out"></i> Cerrar sesión</a>
                 </li>
 
-                <li *ngIf="!username" id="register" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
+                <li *ngIf="!username" id="signup" class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=";javascript" [routerLink]="'signup'">
                         <i class="fa fa-user"></i> Registro</a>
                 </li>
                 <li *ngIf="username" id="username" class="nav-item">
-                    <a class="nav-link active" aria-current="page" href=";javascript">
+                    <a class="nav-link active" aria-current="page">
                         <i class="fa fa-user"></i> {{ username }}</a>
                 </li>
             </ul>

@@ -8,7 +8,6 @@ export class TokenInterceptor implements HttpInterceptor {
         next: HttpHandler
       ): Observable<HttpEvent<any>> {
         const token = sessionStorage.getItem('authToken');
-        console.log(token);
     
         let newHeaders = req.headers;
     

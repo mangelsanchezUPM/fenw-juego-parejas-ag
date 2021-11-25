@@ -19,6 +19,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoginService } from './shared/services/login.service';
 import { RestClientService } from './shared/services/rest-client.service';
 import { TokenInterceptor } from './shared/services/token-interceptor';
+import { SignupComponent } from './body/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TokenInterceptor } from './shared/services/token-interceptor';
     RecordsComponent,
     LoginComponent,
     RecordsChartComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

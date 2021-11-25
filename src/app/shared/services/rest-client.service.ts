@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Record } from '../models/record.model';
 import { environment } from 'src/environments/environment';
+import { Record } from '../models/record.model';
 import { LoginService } from './login.service';
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,9 @@ export class RestClientService {
     return this.http.get<Record[]>(
       environment.baseUrl + '/records/' + this.loginService.getUsername()
     );
+  }
+  signupUser(username: string, email: string, password: string) {
+    const signupBody = { username: username, email: email, password: password };
+    return this.http.post(environment.baseUrl + '/users', signupBody);
   }
 }
