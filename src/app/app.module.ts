@@ -1,24 +1,24 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './body/home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
-import { PreferencesComponent } from './body/preferences/preferences.component';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlayComponent } from './body/play/play.component';
-import { RestClientService } from './shared/services/rest-client.service';
-import { RecordsComponent } from './body/records/records.component';
 import { LoginComponent } from './body/login/login.component';
+import { PlayComponent } from './body/play/play.component';
+import { PreferencesComponent } from './body/preferences/preferences.component';
 import { RecordsChartComponent } from './body/records/records-chart/records-chart.component';
-import { AuthService } from './shared/services/auth.service';
+import { RecordsComponent } from './body/records/records.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavComponent } from './nav/nav.component';
+import { LoginService } from './shared/services/login.service';
+import { RestClientService } from './shared/services/rest-client.service';
+import { TokenInterceptor } from './shared/services/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -50,10 +50,11 @@ import { AuthService } from './shared/services/auth.service';
     }),
   ],
   providers: [
+    LoginService,
     RestClientService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthService,
+      useClass: TokenInterceptor,
       multi: true,
     },
   ],

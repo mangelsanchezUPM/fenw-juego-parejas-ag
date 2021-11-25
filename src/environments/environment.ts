@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'http://fenw.etsisi.upm.es:10000',
+  authTokenHeader: 'Authorization'
 };
 
 /*

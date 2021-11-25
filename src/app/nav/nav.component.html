@@ -26,25 +26,23 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li *ngIf="!restClient.username" id="login" class="nav-item">
+                <li *ngIf="!username" id="login" class="nav-item">
                     <a class="nav-link active" aria-current="page" href=";javascript" [routerLink]="'login'">
                         <i class="fa fa-sign-in"></i> Iniciar sesión</a>
                 </li>
-                <li *ngIf="restClient.username" id="logout" class="nav-item">
+                <li *ngIf="username" id="logout" class="nav-item">
                     <a class="nav-link active" aria-current="page" (click)="logout()" href=";javascript">
                         <i class="fa fa-sign-out"></i> Cerrar sesión</a>
                 </li>
 
-                <li *ngIf="!restClient.username" id="register" class="nav-item">
+                <li *ngIf="!username" id="register" class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">
                         <i class="fa fa-user"></i> Registro</a>
                 </li>
-
-                <li *ngIf="restClient.username" id="logout" class="nav-item">
+                <li *ngIf="username" id="username" class="nav-item">
                     <a class="nav-link active" aria-current="page" href=";javascript">
-                        <i class="fa fa-user"></i> {{restClient.username}}</a>
+                        <i class="fa fa-user"></i> {{ username }}</a>
                 </li>
-
             </ul>
         </div>
     </div>

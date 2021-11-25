@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RestClientService } from 'src/app/shared/services/rest-client.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,22 +16,22 @@ export class LoginComponent {
   });
 
   constructor(
-    private clientRest: RestClientService,
+    private loginService: LoginService,
     private router: Router,
     private toastService: ToastrService
   ) {}
 
   login() {
-    this.clientRest
+    this.loginService
       .userLogin(
         this.loginForm.get('username')?.value,
         this.loginForm.get('password')?.value
       )
       .subscribe(
         (response) => {
-          this.clientRest.authToken =
-            response.headers.get('authorization') || '';
-          this.clientRest.username = this.loginForm.get('username')?.value;
+          const authToken = response.headers.get('authorization') || '';
+          const username = this.loginForm.get('username')?.value;
+          this.loginService.loginSuccess(username, authToken);
           this.router.navigateByUrl('home');
         },
         (err) => {

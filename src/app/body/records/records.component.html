@@ -5,6 +5,6 @@
     </div>
     <div id="records-body" class="body text-center">
         <app-records-chart [records$]="globalRecords$"></app-records-chart>
-        <app-records-chart *ngIf="restClient.username" [records$]="personalRecords$"></app-records-chart>
+        <app-records-chart *ngIf="loginService.getUsername()" [records$]="personalRecords$"></app-records-chart>
     </div>
 </div>

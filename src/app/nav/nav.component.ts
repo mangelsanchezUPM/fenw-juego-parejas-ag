@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { RestClientService } from '../shared/services/rest-client.service';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
-
-  constructor(
-    public restClient: RestClientService
-  ) { }
+  username: string = '';
+  constructor(public loginService: LoginService) {}
 
   ngOnInit(): void {
+    this.loginService.username$.subscribe(
+      (username) => (this.username = username)
+    );
   }
 
   logout() {
-    this.restClient.logout();
-  } 
-
+    this.loginService.userLogout();
+  }
 }
