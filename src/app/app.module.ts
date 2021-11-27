@@ -48,7 +48,7 @@ import { SignupComponent } from './body/signup/signup.component';
       closeButton: true,
       tapToDismiss: true,
       countDuplicates: true,
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-right',
     }),
   ],
   providers: [
