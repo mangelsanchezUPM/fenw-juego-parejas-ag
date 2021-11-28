@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   title = 'JuegoParejas';
 
   ngOnInit() {
-    localStorage.setItem('cards-number', '20');
-    localStorage.setItem('time-limit', '0');
+    localStorage.setItem(environment.cardsNumber, '20');
+    localStorage.setItem(environment.timeLimit, '0');
   }
 }

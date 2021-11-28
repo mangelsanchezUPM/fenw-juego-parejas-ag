@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   baseUrl: 'http://fenw.etsisi.upm.es:10000',
-  authTokenHeader: 'Authorization'
+  authTokenHeader: 'Authorization',
+  cardsNumber: 'cards-number',
+  timeLimit: 'time-limit'
 };
 
 /*

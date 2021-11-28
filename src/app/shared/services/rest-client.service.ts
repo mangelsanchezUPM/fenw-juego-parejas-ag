@@ -17,6 +17,9 @@ export class RestClientService {
       environment.baseUrl + '/records/' + this.loginService.getUsername()
     );
   }
+  saveUserRecord(record: Record) {
+    return this.http.post(environment.baseUrl + '/records/', record);
+  }
   signupUser(username: string, email: string, password: string) {
     const signupBody = { username: username, email: email, password: password };
     return this.http.post(environment.baseUrl + '/users', signupBody);

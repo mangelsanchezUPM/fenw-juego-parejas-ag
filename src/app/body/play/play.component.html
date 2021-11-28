@@ -26,7 +26,10 @@
     </div>
 </div>
 
-<div id="modal" class="modal fade" id="game-over-modal" role="alertdialog" aria-hidden="true">
+<div id="modal" class="modal fade" 
+    [style.display]="gameOver ? 'block' : 'none'" 
+    [style.opacity]="gameOver ? '1' : '0'" 
+    id="game-over-modal" role="alertdialog" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center">
             <div class="modal-header ">
@@ -36,8 +39,9 @@
                 <p id="game-over-message" class="text-center"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-miw-secondary" onclick="exitGame()">Salir</button>
-                <button type="button" class="btn btn-miw-primary" onclick="restartGame()">Reiniciar</button>
+                <button type="button" *ngIf="logged" [disabled]="scoreSaved" class="btn btn-success" (click)="saveScore()">Guardar Puntuación</button>
+                <button type="button" class="btn btn-miw-primary" (click)="restartGame()">Reiniciar</button>
+                <button type="button" class="btn btn-miw-secondary" (click)="finishGame()">Salir</button>
             </div>
         </div>
     </div>

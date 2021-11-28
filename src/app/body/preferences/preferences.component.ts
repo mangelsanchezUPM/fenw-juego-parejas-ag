@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.component.html',
@@ -23,8 +23,8 @@ export class PreferencesComponent {
     const cardsNumber = this.preferencesForm.get('cardsNumber')?.value;
     const timeLimit = this.preferencesForm.get('timeLimit')?.value;
     if (this.preferencesForm.valid) {
-      localStorage.setItem('cards-number', cardsNumber);
-      localStorage.setItem('time-limit', timeLimit);
+      localStorage.setItem(environment.cardsNumber, cardsNumber);
+      localStorage.setItem(environment.timeLimit, timeLimit);
     }
     this.router.navigateByUrl('/play');
   }
