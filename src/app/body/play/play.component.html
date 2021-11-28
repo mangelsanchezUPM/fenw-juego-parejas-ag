@@ -20,7 +20,8 @@
         <div class="col-10">
             <div id="table-top" class="container text-center">
                 <img *ngFor="let card of board; let i = index" id="img-{{i}}" class="img-fluid" draggable="false"
-                    [src]="cardsImagesBasePath + 'reverso.jpg'" (click)="selectCard(i)">
+                    [src]="card.shown ? card.image : reversoImgPath" 
+                    (click)="selectCard(i)">
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ export class PlayComponent implements OnInit {
   score: number = 0;
   totalScore: number = 0;
   timer: number = 0;
-  cardsImagesBasePath: string = '../../assets/naipes/';
+  reversoImgPath: string = '../../assets/naipes/reverso.jpg';
 
   gameOver: boolean = false;
   logged: boolean = false;
@@ -71,12 +71,7 @@ export class PlayComponent implements OnInit {
     const cardSelected = this.board[index];
 
     if (cardSelected.shown) return;
-
     cardSelected.shown = true;
-    document
-      .getElementById('img-' + index)
-      ?.setAttribute('src', cardSelected.image);
-
     if (this.selectedCardIndex == undefined) {
       this.selectedCardIndex = index;
     } else {
@@ -88,20 +83,14 @@ export class PlayComponent implements OnInit {
         if (this.board.every((card: Card) => card.shown == true))
           this.isGameOver();
       } else {
-        previousSelectedCard.shown = false;
-        cardSelected.shown = false;
+        this.waitTurn = true;
         this.score -= 5;
         this.totalScore = this.score + this.getExtraScore();
-        this.waitTurn = true;
         setTimeout(() => {
-          document
-            .getElementById('img-' + index)
-            ?.setAttribute('src', this.cardsImagesBasePath + 'reverso.jpg');
-          document
-            .getElementById('img-' + this.selectedCardIndex)
-            ?.setAttribute('src', this.cardsImagesBasePath + 'reverso.jpg');
-          this.waitTurn = false;
+          previousSelectedCard.shown = false;
+          cardSelected.shown = false;
           this.selectedCardIndex = undefined;
+          this.waitTurn = false;
         }, 500);
       }
     }
