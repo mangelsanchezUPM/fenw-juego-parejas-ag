@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
 
@@ -25,11 +26,9 @@ export class SignupComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      this.repeatedPasswordValidation,
     ]),
     repeatPassword: new FormControl('', [
       Validators.required,
-      this.repeatedPasswordValidation,
     ]),
   });
 
@@ -41,29 +40,19 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  repeatedPasswordValidation(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (
-        this.signupForm.get('password')?.value ==
-        this.signupForm.get('repeatedPassword')?.value
-      ) {
-        return { repeated: true };
-      }
-      return null;
-    };
-  }
-
   signup() {
-    const username: string = this.signupForm.get('username')?.value;
-    const email: string = this.signupForm.get('email')?.value;
-    const password: string = this.signupForm.get('password')?.value;
+    const user = new User(
+      this.signupForm.get('username')?.value,
+      this.signupForm.get('password')?.value,
+      this.signupForm.get('email')?.value
+    );
 
-    this.restClient.signupUser(username, email, password).subscribe(
+    this.restClient.signupUser(user).subscribe(
       (response) => {
         this.signupForm.reset();
         this.toastService.success(
-          `Usuario ${username} registrado con éxito`,
-          'Registrado con éxito',
+          `Usuario ${user.username} registrado con éxito`,
+          'Registrado con éxito'
         );
       },
       (err) => this.toastService.error(err.error, 'Error en el registro')

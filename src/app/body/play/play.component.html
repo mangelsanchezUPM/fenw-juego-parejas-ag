@@ -15,6 +15,13 @@
                     <label class="game-info-label">Total</label>
                     <h3 id="total-score-info" class="game-info-data">{{ totalScore }}</h3>
                 </section>
+                <hr>
+                <section *ngIf="logged" class="game-info-section">
+                    <button type="button" class="btn btn-miw-secondary" (click)="saveGame()">Guardar Partida</button>
+                </section>
+                <section *ngIf="logged" class="game-info-section">
+                    <button type="button" class="btn btn-miw-secondary" (click)="loadGame()">Cargar Partida</button>
+                </section>
             </div>
         </div>
         <div class="col-10">

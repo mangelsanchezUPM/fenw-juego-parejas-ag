@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Card } from 'src/app/shared/models/card.model';
+import { Game } from 'src/app/shared/models/game.model';
 import { Record } from 'src/app/shared/models/record.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
@@ -13,6 +14,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./play.component.css'],
 })
 export class PlayComponent implements OnInit {
+  cardsNumber: number = 20;
+  disposedTime: number = 0;
+
   board: Card[] = [];
   score: number = 0;
   totalScore: number = 0;
@@ -35,21 +39,25 @@ export class PlayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const cardsNumberString: string =
+      localStorage.getItem(environment.cardsNumber) || '20';
+    const timeLimitString: string =
+      localStorage.getItem(environment.timeLimit) || '0';
+
+    this.cardsNumber = parseInt(cardsNumberString);
+    this.disposedTime = parseInt(timeLimitString);
+
     this.initializeBoard();
     this.initializeTimer();
     this.logged = this.loginService.getUsername() ? true : false;
   }
 
   private initializeBoard() {
-    const cardsNumberItem: string | null = localStorage.getItem(
-      environment.cardsNumber
-    );
-    this.scoreSaved = false;
     this.board = [];
     this.score = 0;
+    this.scoreSaved = false;
     this.totalScore = this.getExtraScore();
-    let cardsNumber: number = cardsNumberItem ? parseInt(cardsNumberItem) : 20;
-    for (let i = 0; i < cardsNumber / 2; i++) {
+    for (let i = 0; i < this.cardsNumber / 2; i++) {
       let cardValue = Math.floor(Math.random() * (8 - 1)) + 1;
       this.board.push(new Card(cardValue), new Card(cardValue));
     }
@@ -57,10 +65,7 @@ export class PlayComponent implements OnInit {
   }
 
   private initializeTimer() {
-    const timeLimitItem: string | null = localStorage.getItem(
-      environment.timeLimit
-    );
-    this.timer = timeLimitItem ? parseInt(timeLimitItem) : 0;
+    this.timer = this.disposedTime;
     if (this.timer > 0)
       this.timerInterval = setInterval(() => this.resumeTimer(), 1000);
   }
@@ -103,11 +108,7 @@ export class PlayComponent implements OnInit {
 
   private getExtraScore() {
     let extraPoints = 0;
-    const cardsNumber = parseInt(
-      localStorage.getItem(environment.cardsNumber)!
-    );
-    const timeLimit = parseInt(localStorage.getItem(environment.timeLimit)!);
-    switch (cardsNumber) {
+    switch (this.cardsNumber) {
       case 26:
         extraPoints += 25;
         break;
@@ -118,7 +119,7 @@ export class PlayComponent implements OnInit {
         extraPoints += 0;
         break;
     }
-    switch (timeLimit) {
+    switch (this.disposedTime) {
       case 60:
         extraPoints += 100;
         break;
@@ -153,30 +154,68 @@ export class PlayComponent implements OnInit {
   }
 
   saveScore() {
-    const cards = localStorage.getItem(environment.cardsNumber);
-    const disposedTime = localStorage.getItem(environment.timeLimit);
+    const userRecord = new Record(
+      this.totalScore,
+      this.cardsNumber,
+      this.disposedTime
+    );
+    this.restClient.saveUserRecord(userRecord).subscribe(
+      () => {
+        this.scoreSaved = true;
+        this.toastService.success(
+          'Puntuación total guardada con éxito',
+          'Puntuación guardada'
+        );
+      },
+      (err) => this.toastService.error(err, 'Error al guardar partida')
+    );
+  }
 
-    if (cards && disposedTime) {
-      const userRecord = new Record(
-        this.totalScore,
-        parseInt(cards),
-        parseInt(disposedTime)
-      );
-      this.restClient.saveUserRecord(userRecord).subscribe(
-        () => {
-          this.scoreSaved = true;
-          this.toastService.success(
-            'Puntuación total guardada con éxito',
-            'Puntuación guardada'
-          );
-        },
-        (err) => this.toastService.error(err, 'Error al guardar partida')
-      );
-    } else {
-      this.toastService.error(
-        'Error al obtener los datos para el guardado de partida',
-        'Error al guardar partida'
-      );
-    }
+  saveGame() {
+    const game = new Game(
+      this.board,
+      this.score,
+      this.totalScore,
+      this.cardsNumber,
+      this.timer,
+      this.disposedTime
+    );
+
+    this.restClient.saveGame(game).subscribe(
+      () =>
+        this.toastService.success(
+          'Partida guardada con éxito',
+          'Partida Guardada'
+        ),
+      (err) =>
+        this.toastService.error(
+          'La partida no ha podido ser guardada',
+          'Error al Guardar Partida'
+        )
+    );
+  }
+
+  loadGame() {
+    this.restClient.loadGame().subscribe(
+      (game) => {
+        this.toastService.success(
+          'Partida cargada con éxito',
+          'Partida Cargada'
+        );
+        game = JSON.parse(game.toString());
+
+        this.board = game.board;
+        this.score = game.score;
+        this.totalScore = game.totalScore;
+        this.timer = game.currentTime;
+        this.disposedTime = game.disposedTime;
+        this.cardsNumber = game.cardsNumber;
+      },
+      (err) =>
+        this.toastService.error(
+          'La partida no ha podido ser cargada',
+          'Error al Cargar Partida'
+        )
+    );
   }
 }

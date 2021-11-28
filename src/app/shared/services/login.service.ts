@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  userLogin(username: string, password: string) {
+  userLogin(user: User) {
     const params = new HttpParams()
-      .set('username', username)
-      .set('password', password);
+      .set('username', user.username)
+      .set('password', user.password);
     return this.http.get<HttpResponse<any>>(
       environment.baseUrl + '/users/login',
       {
