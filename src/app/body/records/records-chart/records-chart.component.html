@@ -1,33 +1,40 @@
-<div *ngFor="let record of records$ | async; let i = index" class="row record-element">
-    <div class="col-4">
-        <img class="record-position" [src]="getImage(i)" class="img-fluid record-position">
+<ng-container *ngIf="(records$ | async)?.length; else spinner">
+    <div *ngFor="let record of records$ | async; let i = index" class="row record-element">
+        <div class="col-4">
+            <img class="record-position" [src]="getImage(i)" class="img-fluid record-position">
+        </div>
+        <div class="col-4 lead">
+            <div class="row ">
+                Usuario
+            </div>
+            <div class="row">
+                Puntuación
+            </div>
+            <div class="row">
+                Número cartas
+            </div>
+            <div class="row">
+                Fecha
+            </div>
+        </div>
+        <div class="col-4 lead">
+            <div class="row ">
+                {{record.username}}
+            </div>
+            <div class="row">
+                {{record.punctuation}}
+            </div>
+            <div class="row">
+                {{record.cards}}
+            </div>
+            <div class="row">
+                {{record.recordDate | date: 'dd/MM/yyyy'}}
+            </div>
+        </div>
+
     </div>
-    <div class="col-4 lead">
-        <div class="row ">
-            Usuario
-        </div>
-        <div class="row">
-            Puntuación
-        </div>
-        <div class="row">
-            Número cartas
-        </div>
-        <div class="row">
-            Fecha
-        </div>
-    </div>
-    <div class="col-4 lead">
-        <div class="row ">
-            {{record.username}}
-        </div>
-        <div class="row">
-            {{record.punctuation}}
-        </div>
-        <div class="row">
-            {{record.cards}}
-        </div>
-        <div class="row">
-            {{record.recordDate | date: 'dd/MM/yyyy'}}
-        </div>
-    </div>
-</div>
+</ng-container>
+
+<ng-template #spinner>
+    <img src="../../../../assets/spinner.gif" width="50px" style="margin-top: 20px; margin-bottom: 20px;">
+</ng-template>

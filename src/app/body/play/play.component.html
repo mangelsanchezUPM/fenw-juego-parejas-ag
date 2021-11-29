@@ -45,7 +45,10 @@
                 <h5 class="modal-title">Juego finalizado</h5>
             </div>
             <div class="modal-body">
-                <p id="game-over-message" class="text-center"></p>
+                <p id="game-over-message" class="text-center">
+                    ¡La partida ha terminado! Puntuación total: {{totalScore}}
+                    <span *ngIf="disposedTime > 0">Tiempo restante: {{timer}}</span>
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" *ngIf="logged" [disabled]="scoreSaved" class="btn btn-success"

@@ -10,6 +10,7 @@ import { RestClientService } from 'src/app/shared/services/rest-client.service';
   styleUrls: ['./records.component.css'],
 })
 export class RecordsComponent implements OnInit {
+  logged: boolean = false;
   globalRecords$: Observable<Record[]> = new Observable();
   personalRecords$: Observable<Record[]> = new Observable();
 
@@ -20,7 +21,9 @@ export class RecordsComponent implements OnInit {
 
   ngOnInit(): void {
     this.globalRecords$ = this.restClient.getRecords();
-    if (this.loginService.getUsername())
+    if (this.loginService.getUsername()) {
       this.personalRecords$ = this.restClient.getUserRecords();
+      this.logged = true;
+    }
   }
 }

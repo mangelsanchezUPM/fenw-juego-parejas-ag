@@ -1,0 +1,25 @@
+div.box {
+    width: 100%;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    border: 2px solid var(--secondary);
+    border-radius: 3px;
+}
+div.box.left {
+    margin-right: 5px;
+}
+
+div.box.right {
+    margin-left: 5px;
+}
+.row > * {
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+div.box .body {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

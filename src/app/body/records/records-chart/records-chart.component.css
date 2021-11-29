@@ -1,0 +1,16 @@
+
+.record-element {
+    border-bottom: 0.5px outset var(--secondary);
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+img.record-position {
+    max-width: 90px;
+    margin-top: 20px;
+}
+
+.records .btn.btn-miw-secondary {
+    margin-top: 20px;
+    width: 100%;
+}

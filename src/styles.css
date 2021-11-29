@@ -24,6 +24,7 @@
 
 .btn.btn-miw-primary:hover{
     background-color: var(--primary-darkened);
+    color: var(--text);
 }
 
 .btn.btn-miw-secondary {
@@ -33,6 +34,7 @@
 
 .btn.btn-miw-secondary:hover {
     background-color: var(--secondary-darkened);
+    color: var(--text);
 }
 
 /* Home specific style */
@@ -155,37 +157,6 @@ label.game-info-label {
 
 /* Records specific styles */
 
-div.box.records.container {
-    width: 50%;
-    max-width: 500px;
-    margin-top: 60px;
-    margin-bottom: 40px;
-}
-
-div.box.records .body {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    max-height: 400px;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-}
-
-.record-element {
-    border-bottom: 0.5px outset var(--secondary);
-    margin-right: 0px;
-    margin-left: 0px;
-}
-
-img.record-position {
-    max-width: 90px;
-    margin-top: 20px;
-}
-
-.records .btn.btn-miw-secondary {
-    margin-top: 20px;
-    width: 100%;
-}
 
 .control-required {
     content: '*';
