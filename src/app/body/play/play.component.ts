@@ -211,6 +211,10 @@ export class PlayComponent implements OnInit {
         this.disposedTime = game.disposedTime;
         this.cardsNumber = game.cardsNumber;
         this.selectedCardIndex = game.selectedCardIndex;
+
+        clearInterval(this.timerInterval);
+        if (this.timer > 0)
+          this.timerInterval = setInterval(() => this.resumeTimer(), 1000);
       },
       (err) =>
         this.toastService.error(
