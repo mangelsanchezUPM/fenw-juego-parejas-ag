@@ -7,6 +7,7 @@ export class Game {
   disposedTime: number;
   currentTime: number;
   cardsNumber: number;
+  selectedCardIndex: number | undefined;
 
   constructor(
     board: Card[],
@@ -14,7 +15,8 @@ export class Game {
     totalScore: number,
     cardsNumber: number,
     currentTime: number,
-    disposedtime: number
+    disposedtime: number,
+    selectedCardIndex: number | undefined
   ) {
     this.board = board;
     this.score = score;
@@ -22,5 +24,6 @@ export class Game {
     this.cardsNumber = cardsNumber;
     this.currentTime = currentTime;
     this.disposedTime = disposedtime;
+    this.selectedCardIndex = selectedCardIndex;
   }
 }

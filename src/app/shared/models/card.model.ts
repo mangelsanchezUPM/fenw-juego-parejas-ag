@@ -1,26 +1,14 @@
 export class Card {
-  private _value: number;
-  private _image: string;
-  private _shown: boolean;
-
-  constructor(value: number) {
-    this._value = value;
-    this._image = this.getCardImage(this._value);
-    this._shown = false;
+  value: number;
+  shown: boolean;
+  image: string;
+  
+  constructor(value: number, shown?: boolean) {
+    this.value = value;
+    this.image = this.getCardImage(this.value);
+    this.shown = shown || false;
   }
 
-  get value(): number {
-    return this._value;
-  }
-  get image(): string {
-    return this._image;
-  }
-  get shown(): boolean {
-    return this._shown;
-  }
-  set shown(shown: boolean) {
-    this._shown = shown;
-  }
   getCardImage(value: number) {
     let cardsImgPath = '../assets/naipes/';
     switch (value) {

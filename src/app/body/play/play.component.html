@@ -15,28 +15,29 @@
                     <label class="game-info-label">Total</label>
                     <h3 id="total-score-info" class="game-info-data">{{ totalScore }}</h3>
                 </section>
-                <hr>
-                <section *ngIf="logged" class="game-info-section">
-                    <button type="button" class="btn btn-miw-secondary" (click)="saveGame()">Guardar Partida</button>
-                </section>
-                <section *ngIf="logged" class="game-info-section">
-                    <button type="button" class="btn btn-miw-secondary" (click)="loadGame()">Cargar Partida</button>
-                </section>
+                <ng-container *ngIf="logged">
+                    <hr>
+                    <section class="game-info-section">
+                        <button type="button" class="btn btn-miw-secondary" (click)="saveGame()">Guardar
+                            Partida</button>
+                    </section>
+                    <section class="game-info-section">
+                        <button type="button" class="btn btn-miw-secondary" (click)="loadGame()">Cargar Partida</button>
+                    </section>
+                </ng-container>
             </div>
         </div>
         <div class="col-10">
             <div id="table-top" class="container text-center">
                 <img *ngFor="let card of board; let i = index" id="img-{{i}}" class="img-fluid" draggable="false"
-                    [src]="card.shown ? card.image : reversoImgPath" 
-                    (click)="selectCard(i)">
+                    [src]="card.shown ? card.image : reversoImgPath" (click)="selectCard(i)"
+                    [class]="selectedCardIndex == i ? 'selected-card' : ''">
             </div>
         </div>
     </div>
 </div>
 
-<div id="modal" class="modal fade" 
-    [style.display]="gameOver ? 'block' : 'none'" 
-    [style.opacity]="gameOver ? '1' : '0'" 
+<div id="modal" class="modal fade" [style.display]="gameOver ? 'block' : 'none'" [style.opacity]="gameOver ? '1' : '0'"
     id="game-over-modal" role="alertdialog" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center">
@@ -47,7 +48,8 @@
                 <p id="game-over-message" class="text-center"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" *ngIf="logged" [disabled]="scoreSaved" class="btn btn-success" (click)="saveScore()">Guardar Puntuación</button>
+                <button type="button" *ngIf="logged" [disabled]="scoreSaved" class="btn btn-success"
+                    (click)="saveScore()">Guardar Puntuación</button>
                 <button type="button" class="btn btn-miw-primary" (click)="restartGame()">Reiniciar</button>
                 <button type="button" class="btn btn-miw-secondary" (click)="finishGame()">Salir</button>
             </div>

@@ -26,9 +26,9 @@ export class PlayComponent implements OnInit {
   gameOver: boolean = false;
   logged: boolean = false;
   scoreSaved: boolean = false;
+  selectedCardIndex: number | undefined;
 
   private timerInterval: any;
-  private selectedCardIndex: number | undefined;
   private waitTurn: boolean = false;
 
   constructor(
@@ -71,6 +71,7 @@ export class PlayComponent implements OnInit {
   }
 
   selectCard(index: number) {
+    debugger;
     if (this.waitTurn) return;
 
     const cardSelected = this.board[index];
@@ -178,7 +179,8 @@ export class PlayComponent implements OnInit {
       this.totalScore,
       this.cardsNumber,
       this.timer,
-      this.disposedTime
+      this.disposedTime,
+      this.selectedCardIndex
     );
 
     this.restClient.saveGame(game).subscribe(
@@ -197,19 +199,18 @@ export class PlayComponent implements OnInit {
 
   loadGame() {
     this.restClient.loadGame().subscribe(
-      (game) => {
+      (game: Game) => {
         this.toastService.success(
           'Partida cargada con éxito',
           'Partida Cargada'
         );
-        game = JSON.parse(game.toString());
-
         this.board = game.board;
         this.score = game.score;
         this.totalScore = game.totalScore;
         this.timer = game.currentTime;
         this.disposedTime = game.disposedTime;
         this.cardsNumber = game.cardsNumber;
+        this.selectedCardIndex = game.selectedCardIndex;
       },
       (err) =>
         this.toastService.error(

@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
-  FormGroup,
-  MaxLengthValidator,
-  ValidatorFn,
-  Validators,
+  FormGroup, Validators
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';

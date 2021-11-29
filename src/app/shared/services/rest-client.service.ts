@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Game } from '../models/game.model';
 import { Record } from '../models/record.model';
@@ -29,6 +30,8 @@ export class RestClientService {
     return this.http.post(environment.baseUrl + '/games', game);
   }
   loadGame() {
-    return this.http.get<Game>(environment.baseUrl + '/games');
+    return this.http
+      .get<string>(environment.baseUrl + '/games')
+      .pipe(map((response) => JSON.parse(response) as Game));
   }
 }
