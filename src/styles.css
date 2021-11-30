@@ -141,6 +141,8 @@ label.game-info-label {
 }
 #table-top img.img-fluid {
     padding-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
     max-width: 120px;
     transition: transform .2s;
     user-select: none;
@@ -153,6 +155,7 @@ label.game-info-label {
 #table-top img.img-fluid:hover {
     transform: scale(1.2);
     cursor: pointer;
+    box-shadow: 0px 5px 20px var(--primary);    
 }
 
 /* Records specific styles */
