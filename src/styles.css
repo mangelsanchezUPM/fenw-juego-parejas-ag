@@ -22,7 +22,7 @@
     color: var(--text);
 }
 
-.btn.btn-miw-primary:hover{
+.btn.btn-miw-primary:hover {
     background-color: var(--primary-darkened);
     color: var(--text);
 }
@@ -41,7 +41,8 @@
 
 .home-content {
     background-color: rgb(192, 219, 245);
-    margin-right: 20px;margin-left: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
     padding-top: 30px;
     padding-bottom: 30px;
     border: 2px inset var(--secondary);
@@ -50,7 +51,6 @@
 .home-content .h3 {
     color: white
 }
-
 
 .home-cards {
     max-width: 300px;
@@ -69,7 +69,7 @@
 @media (max-width: 600px) {
     .home-cards.lateral-l, .home-cards.lateral-r {
         display: none;
-    }  
+    }
 }
 
 div.box.container {
@@ -99,7 +99,23 @@ div.box .body {
     color: var(--black);
 }
 
-/* Preferences specific styles */
+.control-required {
+    content: '*';
+}
+
+.form-control.control-invalid {
+    border-color: var(--error);
+}
+
+
+.form-control.control-invalid:focus {
+    border-color: var(--error);
+}
+
+.text-error {
+    color: var(--error);
+    font-size: 0.8em;
+}
 
 div.box.preferences.container {
     width: 30%;
@@ -120,61 +136,4 @@ form.form-preferences {
 .preferences .btn.btn-miw-secondary {
     margin-top: 20px;
     width: 100%;
-}
-
-/* Play specific styles */
-
-#play-content{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.container.game-info {
-    color: var(--text);
-    font-weight: bold;
-    margin-top: 20px;
-    padding: 10px;
-}
-label.game-info-label {
-    font-size: 2vh;
-}
-#table-top img.img-fluid {
-    padding-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    max-width: 120px;
-    transition: transform .2s;
-    user-select: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
-
-#table-top img.img-fluid:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-    box-shadow: 0px 5px 20px var(--primary);    
-}
-
-/* Records specific styles */
-
-
-.control-required {
-    content: '*';
-}
-
-.form-control.control-invalid {
-    border-color: var(--error);
-}
-
-
-.form-control.control-invalid:focus {
-    border-color: var(--error);
-}
-
-.text-error {
-    color: var(--error);
-    font-size: 0.8em;
 }
