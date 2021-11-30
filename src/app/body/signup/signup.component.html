@@ -8,22 +8,48 @@
             <div class="form-group">
                 <label for="username">Nombre de usuario</label>
                 <input id="username" type="text" class="form-control" formControlName="username"
-                    placeholder="Escriba su nombre de usuario">
+                    placeholder="Escriba su nombre de usuario"
+                    [ngClass]="signupForm.get('username')?.invalid && signupForm.get('username')?.dirty ? 'control-invalid' : ''">
+                <span *ngIf="signupForm.get('username')?.hasError('required') && signupForm.get('username')?.dirty"
+                    class="text-error">*Campo
+                    requerido</span>
+                <span *ngIf="signupForm.get('username')?.hasError('userExists') && signupForm.get('username')?.dirty"
+                    class="text-error">*Este nombre de usuario ya ha sido registrado</span>
+                <span *ngIf="signupForm.get('username')?.hasError('maxlength') && signupForm.get('username')?.dirty"
+                    class="text-error">*Máxima longitud del campo 8 caracteres</span>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input id="emai" type="email" class="form-control" formControlName="email"
-                    placeholder="Escriba su email">
+                    placeholder="Escriba su email"
+                    [ngClass]="signupForm.get('email')?.invalid && signupForm.get('email')?.dirty ? 'control-invalid' : ''">
+                <span *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.dirty"
+                    class="text-error">*Campo
+                    requerido</span>
+                <span *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('username')?.dirty"
+                    class="text-error">*Formato incorrecto de email</span>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
                 <input id="password" type="password" class="form-control" formControlName="password"
-                    placeholder="Escriba su contraseña">
+                    placeholder="Escriba su contraseña"
+                    [ngClass]="signupForm.get('password')?.invalid && signupForm.get('password')?.dirty ? 'control-invalid' : ''">
+                <span *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.dirty"
+                    class="text-error">*Campo
+                    requerido</span>
             </div>
             <div class="form-group">
-                <label for="password-rep">Repetir Contraseña</label>
-                <input id="password-rep" type="password" class="form-control" formControlName="repeatPassword"
-                    placeholder="Repita su contraseña">
+                <label for="matchPassword">Repetir Contraseña</label>
+                <input id="matchPassword" type="password" class="form-control" formControlName="matchPassword"
+                    placeholder="Repita su contraseña"
+                    [ngClass]="signupForm.get('matchPassword')?.invalid && signupForm.get('matchPassword')?.dirty ? 'control-invalid' : ''">
+                <span
+                    *ngIf="signupForm.get('matchPassword')?.hasError('matchPassword') && signupForm.get('matchPassword')?.dirty"
+                    class="text-error">*Campo
+                    requerido</span>
+                <span
+                    *ngIf="signupForm.get('matchPassword')?.hasError('doesNotMatch') && signupForm.get('matchPassword')?.dirty"
+                    class="text-error">*Las contraseñas no coinciden</span>
             </div>
             <button type="button" [disabled]="(signupForm.invalid && signupForm.dirty) || signupForm.pristine"
                 class="btn btn-miw-secondary" (click)="signup()">Registro de usuario</button>

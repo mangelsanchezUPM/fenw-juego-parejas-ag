@@ -1,30 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
-  FormGroup, Validators
+  FormGroup,
+  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { RestClientService } from 'src/app/shared/services/rest-client.service';
+import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
+  passwordControl: AbstractControl = new FormControl('', [Validators.required]);
   signupForm: FormGroup = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(8),
-    ]),
+    username: new FormControl('', {
+      validators: [Validators.required, Validators.maxLength(8)],
+      asyncValidators: [
+        CustomValidators.userExistsValidator(this.loginService),
+      ],
+      updateOn: 'change', // Maybe change to blur in order to reduce calls number
+    }),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
+    password: this.passwordControl,
+    matchPassword: new FormControl('', [
       Validators.required,
-    ]),
-    repeatPassword: new FormControl('', [
-      Validators.required,
+      CustomValidators.controlMatches(this.passwordControl),
     ]),
   });
 
@@ -33,8 +39,6 @@ export class SignupComponent implements OnInit {
     private restClient: RestClientService,
     private toastService: ToastrService
   ) {}
-
-  ngOnInit(): void {}
 
   signup() {
     const user = new User(

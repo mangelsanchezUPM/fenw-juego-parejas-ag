@@ -37,4 +37,12 @@ export class LoginService {
   getUsername() {
     return this.username$.getValue();
   }
+  checkUserExists(username: string) {
+    return this.http.get<HttpResponse<any>>(
+      environment.baseUrl + '/users/' + username,
+      {
+        observe: 'response',
+      }
+    );
+  }
 }
