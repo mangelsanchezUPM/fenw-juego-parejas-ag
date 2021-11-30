@@ -21,7 +21,7 @@ export class RecordsComponent implements OnInit {
 
   ngOnInit(): void {
     this.globalRecords$ = this.restClient.getRecords();
-    if (this.loginService.getUsername()) {
+    if (this.loginService.username) {
       this.personalRecords$ = this.restClient.getUserRecords();
       this.logged = true;
     }

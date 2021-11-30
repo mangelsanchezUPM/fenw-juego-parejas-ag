@@ -17,7 +17,7 @@ export class RestClientService {
   }
   getUserRecords() {
     return this.http.get<Record[]>(
-      environment.baseUrl + '/records/' + this.loginService.getUsername()
+      environment.baseUrl + '/records/' + this.loginService.username
     );
   }
   saveUserRecord(record: Record) {

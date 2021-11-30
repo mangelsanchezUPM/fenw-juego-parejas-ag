@@ -49,7 +49,7 @@ export class PlayComponent implements OnInit {
 
     this.initializeBoard();
     this.initializeTimer();
-    this.logged = this.loginService.getUsername() ? true : false;
+    this.logged = this.loginService.username ? true : false;
   }
 
   private initializeBoard() {

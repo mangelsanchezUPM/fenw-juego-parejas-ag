@@ -34,9 +34,6 @@ export class LoginService {
     sessionStorage.setItem('username', username);
     sessionStorage.setItem('authToken', authToken);
   }
-  getUsername() {
-    return this.username$.getValue();
-  }
   checkUserExists(username: string) {
     return this.http.get<HttpResponse<any>>(
       environment.baseUrl + '/users/' + username,
@@ -44,5 +41,8 @@ export class LoginService {
         observe: 'response',
       }
     );
+  }
+  get username() {
+    return this.username$.getValue();
   }
 }

@@ -24,7 +24,7 @@ export class SignupComponent {
       asyncValidators: [
         CustomValidators.userExistsValidator(this.loginService),
       ],
-      updateOn: 'change', // Maybe change to blur in order to reduce calls number
+      updateOn: 'blur',
     }),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: this.passwordControl,
