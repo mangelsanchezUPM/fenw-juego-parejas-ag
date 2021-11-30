@@ -13,7 +13,9 @@
         <div class="col-6">
             <div *ngIf="logged" class="box" style="margin-left:3px">
                 <div class="title text-center">
-                    <h3>Records Personales</h3>
+                    <h3>Records Personales <button type="button" class="btn btn-miw-secondary"
+                            (click)="deleteUserRecords()"><i class="fa fa-trash"></i></button></h3>
+
                 </div>
                 <div id="records-body" class="body text-center">
                     <app-records-chart [records$]="personalRecords$"></app-records-chart>

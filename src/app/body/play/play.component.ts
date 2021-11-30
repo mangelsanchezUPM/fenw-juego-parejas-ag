@@ -167,7 +167,7 @@ export class PlayComponent implements OnInit {
           'Puntuación guardada'
         );
       },
-      (err) => this.toastService.error(err, 'Error al guardar partida')
+      (err) => this.toastService.error('La partida no ha podido ser guardada', 'Error al guardar partida')
     );
   }
 

@@ -21,7 +21,10 @@ export class RestClientService {
     );
   }
   saveUserRecord(record: Record) {
-    return this.http.post(environment.baseUrl + '/records/', record);
+    return this.http.post(environment.baseUrl + '/records', record);
+  }
+  deleteUserRecords() {
+    return this.http.delete(environment.baseUrl + '/records');
   }
   signupUser(user: User) {
     return this.http.post(environment.baseUrl + '/users', user);
