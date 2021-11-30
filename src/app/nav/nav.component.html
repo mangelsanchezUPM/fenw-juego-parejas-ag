@@ -43,7 +43,7 @@
                             <i class="fa fa-user"></i> {{ username }}</a>
                     </li>
                     <li id="logout" class="nav-item">
-                        <a class="nav-link active" aria-current="page" (click)="logout()" href=";javascript">
+                        <a class="nav-link active" aria-current="page" (click)="logout()" href=";javascript" [routerLink]="'home'">
                             <i class="fa fa-sign-out"></i> Cerrar sesión</a>
                     </li>
                 </ng-template>

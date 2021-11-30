@@ -71,7 +71,6 @@ export class PlayComponent implements OnInit {
   }
 
   selectCard(index: number) {
-    debugger;
     if (this.waitTurn) return;
 
     const cardSelected = this.board[index];
@@ -145,7 +144,7 @@ export class PlayComponent implements OnInit {
   }
 
   finishGame() {
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/home');
   }
 
   restartGame() {

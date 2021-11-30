@@ -5,10 +5,23 @@ import {
   HttpRequest,
   HttpResponse,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoginService } from './login.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class TokenInterceptor implements HttpInterceptor {
+  constructor(
+    private router: Router,
+    private toastService: ToastrService,
+    private loginService: LoginService
+  ) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -21,12 +34,20 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(authReq).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          const newAuthToken: string | null = event.headers.get(
-            environment.authTokenHeader
-          );
-          if (newAuthToken)
-            sessionStorage.setItem(environment.authToken, newAuthToken);
-          console.log(token == newAuthToken)
+          if (event.status == 401) {
+            this.router.navigate(['']);
+            this.toastService.warning(
+              'El token de autenticación ha expirado',
+              'Sesión expirada'
+            );
+            this.loginService.userLogout();
+          } else {
+            const newAuthToken: string | null = event.headers.get(
+              environment.authTokenHeader
+            );
+            if (newAuthToken)
+              sessionStorage.setItem(environment.authToken, newAuthToken);
+          }
         }
         return event;
       })

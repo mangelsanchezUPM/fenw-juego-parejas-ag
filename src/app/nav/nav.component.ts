@@ -9,19 +9,11 @@ import { LoginService } from '../shared/services/login.service';
 })
 export class NavComponent implements OnInit {
   username: string = '';
-  constructor(
-    public loginService: LoginService,
-    private toastService: ToastrService
-  ) {}
+  constructor(public loginService: LoginService) {}
 
   ngOnInit(): void {
     this.loginService.username$.subscribe((username) => {
       this.username = username;
-      const toastTitle = username ? `Inicio de sesión` : `Cierre de sesión`;
-      const toastMessage = username
-        ? `Ha iniciado sesión como usuario ${username}`
-        : `Se ha cerrado la sesión con éxito cerrado sesión`;
-      this.toastService.success(toastMessage, toastTitle);
     });
   }
 

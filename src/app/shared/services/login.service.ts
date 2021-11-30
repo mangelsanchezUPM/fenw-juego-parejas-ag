@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
@@ -12,7 +13,7 @@ export class LoginService {
     sessionStorage.getItem('username') || ''
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastService: ToastrService) {}
 
   userLogin(user: User) {
     const params = new HttpParams()
@@ -28,9 +29,18 @@ export class LoginService {
   }
   userLogout() {
     sessionStorage.clear();
+    this.username$.next('');
+    this.toastService.success(
+      'Se ha cerrado la sesión con éxito',
+      'Cierre de sesión'
+    );
   }
   loginSuccess(username: string, authToken: string) {
     this.username$.next(username);
+    this.toastService.success(
+      'Has iniciado sesión con éxito como usuario ' + username,
+      'Inicio de sesión'
+    );
     sessionStorage.setItem('username', username);
     sessionStorage.setItem('authToken', authToken);
   }
