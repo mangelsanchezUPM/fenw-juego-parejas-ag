@@ -3,12 +3,12 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse,
+  HttpResponse
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './login.service';
 
@@ -32,16 +32,27 @@ export class TokenInterceptor implements HttpInterceptor {
       newHeaders = newHeaders.append(environment.authTokenHeader, token);
     const authReq = req.clone({ headers: newHeaders });
     return next.handle(authReq).pipe(
-      map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          if (event.status == 401) {
+      catchError((err) => {
+        if (err.status == 401) {
+          if (err.error == 'no valid token') {
             this.router.navigate(['']);
             this.toastService.warning(
               'El token de autenticación ha expirado',
               'Sesión expirada'
             );
             this.loginService.userLogout();
-          } else {
+          } else if ((err.error = 'invalid username/password supplied')) {
+            this.toastService.error(
+              'Combinación de nombre de usuario y contraseña inválidos',
+              'Error al iniciar sesión'
+            );
+          }
+        }
+        return of(err);
+      }),
+      map((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          if (event.status == 200) {
             const newAuthToken: string | null = event.headers.get(
               environment.authTokenHeader
             );

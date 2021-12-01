@@ -1,4 +1,4 @@
-<ng-container *ngIf="(records$ | async)?.length; else spinner">
+<ng-container *ngIf="!recordsPending; else spinner">
     <div *ngFor="let record of records$ | async; let i = index" class="row record-element">
         <div class="col-4">
             <img class="record-position" [src]="getImage(i)" class="img-fluid record-position">

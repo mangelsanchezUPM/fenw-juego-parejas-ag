@@ -3,7 +3,7 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';
@@ -26,7 +26,7 @@ export class SignupComponent {
       ],
       updateOn: 'blur',
     }),
-    email: new FormControl(null,  [Validators.required, Validators.email]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
     password: this.passwordControl,
     matchPassword: new FormControl(null, [
       Validators.required,
@@ -46,16 +46,15 @@ export class SignupComponent {
       this.signupForm.get('password')?.value,
       this.signupForm.get('email')?.value
     );
-    console.log(this.signupForm)
-    // this.restClient.signupUser(user).subscribe(
-    //   (response) => {
-    //     this.signupForm.reset();
-    //     this.toastService.success(
-    //       `Usuario ${user.username} registrado con éxito`,
-    //       'Registrado con éxito'
-    //     );
-    //   },
-    //   (err) => this.toastService.error(err.error, 'Error en el registro')
-    // );
+    this.restClient.signupUser(user).subscribe(
+      (response) => {
+        this.signupForm.reset();
+        this.toastService.success(
+          `Usuario ${user.username} registrado con éxito`,
+          'Registrado con éxito'
+        );
+      },
+      (err) => this.toastService.error(err.error, 'Error en el registro')
+    );
   }
 }
