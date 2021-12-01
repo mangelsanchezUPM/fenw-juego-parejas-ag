@@ -1,10 +1,5 @@
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormGroup,
-  ValidatorFn,
-} from '@angular/forms';
-import { map } from 'rxjs';
+import { AbstractControl, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { catchError, map, of } from 'rxjs';
 import { LoginService } from '../services/login.service';
 
 export class CustomValidators {
@@ -18,9 +13,12 @@ export class CustomValidators {
   static userExistsValidator(loginService: LoginService): AsyncValidatorFn {
     return (userControl: AbstractControl) =>
       loginService.checkUserExists(userControl.value).pipe(
-        map((response) => {
-          return response.status == 200 ? { userExists: true } : null;
-        })
+        catchError((err) => {
+          return of(err);
+        }),
+        map((response) =>
+          response.status == 200 ? { userExists: true } : null
+        )
       );
   }
 }

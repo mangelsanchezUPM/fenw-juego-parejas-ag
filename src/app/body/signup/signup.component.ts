@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user.model';
@@ -19,16 +19,16 @@ import { CustomValidators } from 'src/app/shared/validators/custom.validators';
 export class SignupComponent {
   passwordControl: AbstractControl = new FormControl('', [Validators.required]);
   signupForm: FormGroup = new FormGroup({
-    username: new FormControl('', {
+    username: new FormControl(null, {
       validators: [Validators.required, Validators.maxLength(8)],
       asyncValidators: [
         CustomValidators.userExistsValidator(this.loginService),
       ],
       updateOn: 'blur',
     }),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl(null,  [Validators.required, Validators.email]),
     password: this.passwordControl,
-    matchPassword: new FormControl('', [
+    matchPassword: new FormControl(null, [
       Validators.required,
       CustomValidators.controlMatches(this.passwordControl),
     ]),
@@ -46,16 +46,16 @@ export class SignupComponent {
       this.signupForm.get('password')?.value,
       this.signupForm.get('email')?.value
     );
-
-    this.restClient.signupUser(user).subscribe(
-      (response) => {
-        this.signupForm.reset();
-        this.toastService.success(
-          `Usuario ${user.username} registrado con éxito`,
-          'Registrado con éxito'
-        );
-      },
-      (err) => this.toastService.error(err.error, 'Error en el registro')
-    );
+    console.log(this.signupForm)
+    // this.restClient.signupUser(user).subscribe(
+    //   (response) => {
+    //     this.signupForm.reset();
+    //     this.toastService.success(
+    //       `Usuario ${user.username} registrado con éxito`,
+    //       'Registrado con éxito'
+    //     );
+    //   },
+    //   (err) => this.toastService.error(err.error, 'Error en el registro')
+    // );
   }
 }

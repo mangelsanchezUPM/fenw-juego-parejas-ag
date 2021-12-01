@@ -26,7 +26,7 @@
                 <span *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.dirty"
                     class="text-error">*Campo
                     requerido</span>
-                <span *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('username')?.dirty"
+                <span *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.dirty"
                     class="text-error">*Formato incorrecto de email</span>
             </div>
             <div class="form-group">
@@ -44,14 +44,14 @@
                     placeholder="Repita su contraseña"
                     [ngClass]="signupForm.get('matchPassword')?.invalid && signupForm.get('matchPassword')?.dirty ? 'control-invalid' : ''">
                 <span
-                    *ngIf="signupForm.get('matchPassword')?.hasError('matchPassword') && signupForm.get('matchPassword')?.dirty"
+                    *ngIf="signupForm.get('matchPassword')?.hasError('required') && signupForm.get('matchPassword')?.dirty"
                     class="text-error">*Campo
                     requerido</span>
                 <span
                     *ngIf="signupForm.get('matchPassword')?.hasError('doesNotMatch') && signupForm.get('matchPassword')?.dirty"
                     class="text-error">*Las contraseñas no coinciden</span>
             </div>
-            <button type="button" [disabled]="(signupForm.invalid && signupForm.dirty) || signupForm.pristine"
+            <button type="button" [disabled]="signupForm.invalid || signupForm.pristine"
                 class="btn btn-miw-secondary" (click)="signup()">Registro de usuario</button>
         </form>
     </div>
